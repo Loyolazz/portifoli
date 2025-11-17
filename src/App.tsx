@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 import './App.css'
 
 const projects = [
@@ -65,18 +67,79 @@ const projects = [
   },
 ]
 
-const carouselItems = [
+const screenShowcases = [
   {
     title: 'Mood Day',
-    note: 'Preview da interface front-end em breve',
+    description: 'Aplicativo para registrar e acompanhar o humor diário com visual moderno.',
+    stack: ['React Native', 'Mobile'],
+    images: [
+      { src: '/screens/moodDayHome.png', caption: 'Tela inicial com cards de humor' },
+      { src: '/screens/moodDayLogin.png', caption: 'Autenticação clara e direta' },
+      { src: '/screens/moodDaySelectHumor.png', caption: 'Seleção guiada do humor do dia' },
+      { src: '/screens/mooDayPerfil.png', caption: 'Perfil com resumo de humor e avatar' },
+    ],
   },
   {
     title: 'CompassFlix',
-    note: 'Espaço para screenshots do catálogo',
+    description: 'Catálogo inspirado em streaming com listas, detalhes e perfis.',
+    stack: ['React', 'Front-end'],
+    images: [
+      { src: '/screens/compassflixHome.png', caption: 'Home com destaques de filmes' },
+      { src: '/screens/compassflixLogin.jpg', caption: 'Login com branding e CTA visíveis' },
+      { src: '/screens/compassflixMovieScreen.png', caption: 'Detalhes completos de cada título' },
+      { src: '/screens/compassflixSeriesScreen.png', caption: 'Grade de séries com navegação simples' },
+      { src: '/screens/compassflixPerfil.jpg', caption: 'Área de perfil com preferências' },
+    ],
   },
   {
-    title: 'JusCash',
-    note: 'Área reservada para telas do onboarding',
+    title: 'MyMovies',
+    description: 'Listagem de filmes com favoritos, calendário e detalhes salvos.',
+    stack: ['React', 'Front-end'],
+    images: [
+      { src: '/screens/L2testMyMoviesHome.png', caption: 'Home com cards e filtros' },
+      { src: '/screens/L2testMyMoviesHome2.png', caption: 'Layout alternativo com destaques' },
+      { src: '/screens/L2testMyMoviesFavorites.png', caption: 'Biblioteca de favoritos marcada' },
+      { src: '/screens/L2testMyMoviesFavorites2.png', caption: 'Favoritos com CTA de detalhes' },
+      { src: '/screens/L2testMyMoviesHomeCalledarSave.png', caption: 'Integração com agenda e lembretes' },
+      { src: '/screens/L2testMyMoviesHome3.png', caption: 'Exploração contínua de catálogo' },
+      { src: '/screens/L2testMyMoviesHome4.png', caption: 'Experiência consistente em diferentes listas' },
+    ],
+  },
+  {
+    title: 'UniPass RN',
+    description: 'Portal acadêmico mobile com jornadas para alunos e professores.',
+    stack: ['React Native', 'Mobile'],
+    images: [
+      { src: '/screens/uniPassLogin.png', caption: 'Login institucional com validação' },
+      { src: '/screens/uniPassHomeAluno.png', caption: 'Dashboard do aluno com atalhos' },
+      { src: '/screens/uniPassHomeProfessor.png', caption: 'Painel do professor com cards de cursos' },
+      { src: '/screens/uniPassCarteirinhaAlunoProfessor.png', caption: 'Carteirinha digital para identificação' },
+      { src: '/screens/uniPassInscircaoCursoAluno.png', caption: 'Inscrição rápida em cursos extras' },
+      { src: '/screens/uniPassCursosExtrasAluno.png', caption: 'Exploração de cursos complementares' },
+      { src: '/screens/uniPassHorasAluno.png', caption: 'Controle de horas e progresso' },
+      { src: '/screens/uniPassCursoCertificadoScreenAluno.png', caption: 'Certificados disponíveis para download' },
+      { src: '/screens/uniPassCriarEditarCursoProfessor.png', caption: 'Criação e edição de cursos' },
+      { src: '/screens/uniPassEditarCriarCursoProfessor.png', caption: 'Gestão de conteúdo para aulas' },
+      { src: '/screens/uniPassConfIrmarCriacaoCursoProfessor.png', caption: 'Confirmação de publicação do curso' },
+    ],
+  },
+  {
+    title: 'Globoplay Test',
+    description: 'Desafio inspirado na experiência Globoplay com navegação fluida.',
+    stack: ['Kotlin', 'Mobile'],
+    images: [
+      { src: '/screens/globoplayTestKotlinHome.png', caption: 'Página inicial com carrosséis de conteúdo' },
+      { src: '/screens/globoplayTestKotlinHomeLoading.png', caption: 'Esqueleto de carregamento customizado' },
+      { src: '/screens/globoplayTestKotlinMovieSerieScreen.png', caption: 'Lista de filmes e séries com filtros' },
+      { src: '/screens/globoplayTestKotlinMovieSerieScreenDetails.png', caption: 'Detalhes ricos para cada produção' },
+      { src: '/screens/globoplayTestKotlinFavorites.png', caption: 'Coleção de favoritos com visual limpo' },
+    ],
+  },
+  {
+    title: 'Devvo Challenge',
+    description: 'Solução full-stack com fluxo completo e visual detalhado.',
+    stack: ['Full Stack'],
+    images: [{ src: '/screens/DevvoFullStackAneis.png', caption: 'Dashboard principal do desafio' }],
   },
 ]
 
@@ -154,6 +217,27 @@ const education = {
 }
 
 function App() {
+  const [activeGroupIndex, setActiveGroupIndex] = useState(0)
+  const [activeFrameIndex, setActiveFrameIndex] = useState(0)
+
+  const currentGroup = screenShowcases[activeGroupIndex]
+  const activeFrame = currentGroup.images[activeFrameIndex]
+
+  useEffect(() => {
+    setActiveFrameIndex(0)
+  }, [activeGroupIndex])
+
+  const handleNext = () => {
+    const next = (activeFrameIndex + 1) % currentGroup.images.length
+    setActiveFrameIndex(next)
+  }
+
+  const handlePrev = () => {
+    const prev =
+      (activeFrameIndex - 1 + currentGroup.images.length) % currentGroup.images.length
+    setActiveFrameIndex(prev)
+  }
+
   return (
     <div className="page">
       <header className="hero">
@@ -331,23 +415,77 @@ function App() {
         <div className="section-header">
           <div>
             <p className="eyebrow">Carrossel de telas</p>
-            <h2>Espaço reservado para os fronts</h2>
+            <h2>Interfaces reais das entregas</h2>
             <p className="muted">
-              Substitua os placeholders pelas imagens dos projetos quando quiser destacar cada UI.
+              Navegue pelas telas capturadas direto dos apps e desafios técnicos, em versões mobile e web.
             </p>
           </div>
-          <div className="pill">Pronto para receber screenshots</div>
+          <div className="pill">{currentGroup.title}</div>
         </div>
-        <div className="carousel">
-          {carouselItems.map((item) => (
-            <div key={item.title} className="slide">
-              <div className="slide-label">{item.title}</div>
-              <div className="slide-placeholder">{item.note}</div>
-              <p className="muted">
-                Cole aqui uma imagem do front ou uma prévia gerada do projeto correspondente.
-              </p>
+
+        <div className="carousel-shell">
+          <div className="carousel-sidebar">
+            <p className="eyebrow">Projetos</p>
+            <div className="carousel-tabs">
+              {screenShowcases.map((group, index) => {
+                const isActive = index === activeGroupIndex
+                return (
+                  <button
+                    key={group.title}
+                    className={`tab ${isActive ? 'active' : ''}`}
+                    onClick={() => setActiveGroupIndex(index)}
+                  >
+                    <div className="tab-head">
+                      <span className="dot" />
+                      <span className="tab-title">{group.title}</span>
+                    </div>
+                    <p className="tab-desc">{group.description}</p>
+                    <div className="tab-stack">
+                      {group.stack.map((item) => (
+                        <span key={item} className="chip ghost">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </button>
+                )
+              })}
             </div>
-          ))}
+          </div>
+
+          <div className="carousel-stage">
+            <div className="frame">
+              <img src={activeFrame.src} alt={activeFrame.caption} />
+              <div className="frame-overlay">
+                <div>
+                  <p className="eyebrow">{currentGroup.title}</p>
+                  <h3>{activeFrame.caption}</h3>
+                </div>
+                <div className="pill soft">
+                  {activeFrameIndex + 1}/{currentGroup.images.length}
+                </div>
+              </div>
+            </div>
+
+            <div className="carousel-controls">
+              <button type="button" className="ctrl" onClick={handlePrev}>
+                ← Anterior
+              </button>
+              <div className="dots-row">
+                {currentGroup.images.map((image, idx) => (
+                  <button
+                    key={image.src}
+                    className={`dot-btn ${idx === activeFrameIndex ? 'active' : ''}`}
+                    onClick={() => setActiveFrameIndex(idx)}
+                    aria-label={`Ir para a tela ${idx + 1} do projeto ${currentGroup.title}`}
+                  />
+                ))}
+              </div>
+              <button type="button" className="ctrl" onClick={handleNext}>
+                Próxima →
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
