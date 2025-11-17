@@ -243,7 +243,7 @@ function App() {
       <header className="hero">
         <div className="badge">Portfólio Técnico</div>
         <h1>
-          Arthur Araujo Loyola — <span>Desenvolvedor Full-Stack Mobile</span>
+          Arthur Araujo Loyola — <span>Desenvolvedor Full-Stack</span>
         </h1>
         <p className="lead">
           Mais de quatro anos em mobile e back-end, modernizando legados e entregando apps
