@@ -162,7 +162,7 @@ function App() {
           Arthur Araujo Loyola — <span>Desenvolvedor Full-Stack Mobile</span>
         </h1>
         <p className="lead">
-          Mais de quatro anos em mobile e back-end, modernizando legados, liderando squads e entregando apps
+          Mais de quatro anos em mobile e back-end, modernizando legados e entregando apps
           publicados nas lojas. Foco em React Native, Kotlin, Node.js e APIs escaláveis.
         </p>
         <div className="cta-row">
@@ -186,7 +186,7 @@ function App() {
           <div className="meta-card">
             <p className="eyebrow">Local</p>
             <p className="meta-title">Aracaju - SE</p>
-            <p className="muted">Disponível para remoto e híbrido, com atuação em squads distribuídos.</p>
+            <p className="muted">Disponível para remoto, com atuação em squads distribuídos.</p>
           </div>
           <div className="meta-card">
             <p className="eyebrow">Foco</p>
@@ -234,8 +234,8 @@ function App() {
         </div>
         <div className="about-card">
           <p className="muted">
-            Atuei da descoberta ao deploy em projetos publicados nas lojas Apple e Google. Lidero squads,
-            organizo backlog técnico e garanto rastreabilidade com documentação e APIs versionadas.
+            Atuei da descoberta ao deploy em projetos publicados nas lojas Apple e Google. Organizo backlog técnico e
+              garanto rastreabilidade com documentação e APIs versionadas.
           </p>
           <div className="contact-grid">
             {contacts.map((contact) => (
